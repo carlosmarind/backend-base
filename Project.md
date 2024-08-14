@@ -1,0 +1,1 @@
+Proyecto backen base , podemos verificar varios factores y herramientas que podemos utilizar en este curso , como por ejemplo Jenkins / SonarQube / Nexus y Github!
