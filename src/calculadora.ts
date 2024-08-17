@@ -56,17 +56,26 @@ function multiplicar(a: number, b: number) {
     return a * b;
 }
 
-function dividir(a: number, b: number) {
+function dividir(a: number, b: number): number {
+    // Verificar si alguno de los parámetros es undefined
     if (a === undefined || b === undefined) {
-        console.log("retornando throw")
+        console.log("retornando throw");
         throw new Error("No se puede dividir indefinidos");
     }
 
+    // Verificar si ambos parámetros son números
     if (typeof a !== 'number' || typeof b !== 'number') {
         return NaN;
     }
 
-    return a % b;
+    // Verificar si b es cero, ya que la división por cero no está permitida
+    if (b === 0) {
+        console.log("retornando throw");
+        throw new Error("No se puede dividir por cero");
+    }
+
+    // Realizar la división
+    return a / b;
 }
 
 function potencia(a: number, b: number): number {
