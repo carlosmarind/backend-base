@@ -78,6 +78,11 @@ describe("Calculadora", () => {
         b = 3;
         expect(operar("potencia", a, b)).toBe(8); // 2^3 = 8
     
+        // Prueba para factorial
+        a = 5;
+        b = 3;
+        expect(operar("factorial", a, b)).toBe(120); // 5! = 120
+    
         // Prueba para valor no numérico
         a = 10;
         b = "a";

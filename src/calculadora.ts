@@ -74,7 +74,7 @@ function dividir(a: number, b: number): number {
         throw new Error("No se puede dividir por cero");
     }
 
-    // Realizar la división
+    // Realizar la divisiónn
     return a / b;
 }
 
