@@ -1,5 +1,5 @@
 import { describe, test, expect } from "@jest/globals";
-import { restar, suma, operar } from "../src/calculadora.js";
+import { restar, suma, operar, multiplicar, dividir, potencia, factorial } from "../src/calculadora.js";
 import app from "../src/server.js";
 import request from "supertest";
 
@@ -52,6 +52,100 @@ describe("Calculadora", () => {
         expect(() => { restar(a, b) }).toThrow("No se puede sumar indefinidos");
     });
 
+    test("multiplicar dos números", () => {
+
+        let a: any = 10;
+        let b: any = 5;
+        expect(multiplicar(a, b)).toBe(50); // 10 * 5 = 50
+    
+        a = 0;
+        b = 5;
+        expect(multiplicar(a, b)).toBe(0); // 0 * 5 = 0
+    
+        a = "a";
+        b = 5;
+        expect(multiplicar(a, b)).toBeNaN(); // "a" no es un número, debe retornar NaN
+    
+        a = undefined;
+        b = 5;
+        expect(() => { multiplicar(a, b) }).toThrow("No se puede multiplicar indefinidos"); // a es undefined, debe lanzar un error
+    
+        a = 10;
+        b = undefined;
+        expect(() => { multiplicar(a, b) }).toThrow("No se puede multiplicar indefinidos"); // b es undefined, debe lanzar un error
+    });
+    
+
+    test("dividir dos números", () => {
+
+        let a: any = 10;
+        let b: any = 2;
+        expect(dividir(a, b)).toBe(5); // 10 / 2 = 5
+    
+        a = 10;
+        b = 0;
+        expect(() => { dividir(a, b) }).toThrow("No se puede dividir por cero"); // División por cero
+    
+        a = "a";
+        b = 2;
+        expect(dividir(a, b)).toBeNaN(); // "a" no es un número, debe retornar NaN
+    
+        a = undefined;
+        b = 2;
+        expect(() => { dividir(a, b) }).toThrow("No se puede dividir indefinidos"); // a es undefined, debe lanzar un error
+    
+        a = 10;
+        b = undefined;
+        expect(() => { dividir(a, b) }).toThrow("No se puede dividir indefinidos"); // b es undefined, debe lanzar un error
+    });
+    
+    test("elevar un número a una potencia", () => {
+
+        let base: any = 2;
+        let exponente: any = 3;
+        expect(potencia(base, exponente)).toBe(8); // 2^3 = 8
+    
+        base = 5;
+        exponente = 0;
+        expect(potencia(base, exponente)).toBe(1); // 5^0 = 1
+    
+        base = -2;
+        exponente = 3;
+        expect(potencia(base, exponente)).toBe(-8); // (-2)^3 = -8
+    
+        base = 2;
+        exponente = "a";
+        expect(potencia(base, exponente)).toBeNaN(); // "a" no es un número, debe retornar NaN
+    
+        base = undefined;
+        exponente = 3;
+        expect(() => { potencia(base, exponente) }).toThrow("No se puede realizar operación con N° indefinidos"); // base es undefined, debe lanzar un error
+    
+        base = 2;
+        exponente = undefined;
+        expect(() => { potencia(base, exponente) }).toThrow("No se puede realizar operación con N° indefinidos"); // exponente es undefined, debe lanzar un error
+    });
+    
+    
+    test("calcular el factorial de un número", () => {
+
+        let y: any = 5;
+        expect(factorial(y)).toBe(120); // 5! = 120
+    
+        y = 0;
+        expect(factorial(y)).toBe(1); // 0! = 1
+    
+        y = "a";
+        expect(factorial(y)).toBeNaN(); // No es un número, debe retornar NaN
+    
+        y = -5;
+        expect(factorial(y)).toBeNaN(); // El factorial no está definido para números negativos
+    
+        y = undefined;
+        expect(() => { factorial(y) }).toThrow("No se puede calcular el factorial de un indefinido");
+    
+    });
+    
 
     test("test de endpoint /", async () => {
         return await request(app)
@@ -59,7 +153,7 @@ describe("Calculadora", () => {
             .expect("Content-Type", /text/)
             .expect(200)
             .then((response) => {
-                expect(response.text).toBe("Hola mundo al usuario cmd");
+                expect(response.text).toBe("Hola mundo al usuario Williams ");
             })
     });
 
