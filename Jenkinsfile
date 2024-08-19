@@ -34,6 +34,7 @@ pipeline {
             steps {
                 sh 'docker build -t backend-base:latest .'
                 sh 'docker tag backend-base:latest localhost:8082/backend-base:latest'
+                sh 'docker login -u admin -p admin123 localhost:8082'
                 sh 'docker push localhost:8082/backend-base:latest'
             }
         }
