@@ -1,9 +1,31 @@
 import { describe, test, expect } from "@jest/globals";
 import { restar, suma, operar, multiplicar, dividir, potencia, factorial } from "../src/calculadora.js";
 import app from "../src/server.js";
-//import request from "supertest";
+import request from "supertest";
 
 describe("Calculadora", () => {
+
+    test("test de endpoint /", async () => {
+        return await request(app)
+            .get("/")
+            .expect("Content-Type", /text/)
+            .expect(200)
+            .then((response) => {
+                expect(response.text).toBe("Hola mundo al usuario Williams ");
+            })
+    });
+
+    test("test de endpoint operar", async () => {
+        return await request(app)
+            .get("/operar?a=30&b=30&oper=suma")
+            .expect("Content-Type", /text/)
+            .expect(200)
+            .then((response) => {
+                expect(response.text).toBe("el resultado de la operacion suma de 30 y 30 es 60");
+            })
+    });
+
+});
 
     test("sumar dos números", () => {
 
