@@ -15,7 +15,7 @@ describe("Calculadora", () => {
             })
     });
 
-    test("test de endpoint operar", async () => {
+        test("test de endpoint operar", async () => {
         return await request(app)
             .get("/operar?a=30&b=30&oper=suma")
             .expect("Content-Type", /text/)
@@ -25,7 +25,7 @@ describe("Calculadora", () => {
             })
     });
 
-});
+
 
     test("sumar dos números", () => {
 
