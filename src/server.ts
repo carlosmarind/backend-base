@@ -1,6 +1,6 @@
 import express from "express";
 import { configuration } from "./config.js";
-import { operar, suma } from "./calculadora.js";
+import { operar, operar_un_numero } from "./calculadora.js";
 
 const app = express();
 
@@ -17,8 +17,14 @@ app.get("/operar", (req, res) => {
   
   const oper = req.query.oper as string;
 
-  const resultado = operar(oper, a, b);
-  res.send(`el resultado de la operacion ${oper} de ${a} y ${b} es ${resultado}`);
+  if (oper != "factorial"){
+    const resultado = operar(oper, a, b);
+    res.send(`el resultado de la operacion ${oper} de ${a} y ${b} es ${resultado}`);}
+
+  else{
+    const resultado = operar_un_numero(oper, a);
+    res.send(`el resultado de la operacion ${oper} de ${a} es ${resultado}`);}
+  
 });
 
 export default app;
