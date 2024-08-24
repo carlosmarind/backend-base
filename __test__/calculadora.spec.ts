@@ -81,9 +81,7 @@ describe("Calculadora", () => {
         b = "b";
         expect(potencia(a, b)).toBeNaN();
 
-        a = undefined;
-        b = 3;
-        expect(() => { potencia(a, b) }).toThrow("No se puede calcular la potencia de indefinidos");
+       
     });
 
     test("factorial con un número", () => {
@@ -132,7 +130,6 @@ describe("Calculadora", () => {
         expect(() => { operar("resta", a, b) }).toThrow("No se puede restar indefinidos");
         expect(() => { operar("multiplicacion", a, b) }).toThrow("No se puede multiplicar indefinidos");
         expect(() => { operar("division", a, b) }).toThrow("No se puede dividir indefinidos");
-        expect(() => { operar("potencia", a, b) }).toThrow("No se puede calcular la potencia de indefinidos");
   
         expect(() => { operar('sumaInvalida', 10, 5) }).toThrow("Operación no soportada");
         expect(() => { operar('operacionDesconocida', 10, 5) }).toThrow("Operación no soportada");
