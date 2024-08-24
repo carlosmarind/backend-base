@@ -4,7 +4,7 @@ pipeline {
         stage('Build and test') {
             agent {
                 docker {
-                    image 'node:20.11.1-alpine3.19' 
+                    image 'node:20.11.1-alpine3.19' //imagen de node que contiene npm
                     reuseNode true
                 }
             }
