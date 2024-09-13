@@ -4,6 +4,7 @@ pipeline {
         registry = "https://us-central1-docker.pkg.dev"
         registryCredential = 'gcp-registry'
         dockerImage = 'us-central1-docker.pkg.dev/expertis-classroom/docker-repository/backend-base'
+        NPM_CONFIG_CACHE = "${WORKSPACE}/.npm"
     }
     stages{
         stage("pipeline de construcion en node"){
