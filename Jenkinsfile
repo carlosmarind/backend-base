@@ -32,5 +32,17 @@ pipeline {
                 }
             }
         }
+        stage("pipeline de construcion en docker"){
+           steps{
+               script{
+                   docker.withRegistry( "${registry}", registryCredential ){
+                        sh "docker build -t ${dockerImage}:latest ."
+                        sh "docker tag ${dockerImage}:latest ${dockerImage}:${BUILD_NUMBER}"
+                        sh "docker push ${dockerImage}:latest"
+                        sh "docker push ${dockerImage}:${BUILD_NUMBER}"
+                   }
+               }
+           } 
+        }
     }
 }
