@@ -1,0 +1,107 @@
+[33mcommit 790d13e373cb055e36dd5d625770128e8b32164d[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Carlos Marin Diaz <carlosmarind@gmail.com>
+Date:   Mon Aug 12 21:35:54 2024 -0400
+
+    docker file desde jenkins
+
+[33mcommit c615c5ec8168fbf7d50921d6aea5992e7e8fb118[m
+Author: Carlos Marin Diaz <carlosmarind@gmail.com>
+Date:   Mon Aug 12 21:34:15 2024 -0400
+
+    docker file desde jenkins
+
+[33mcommit 0868ec569e23e4c730901f0b582f6349b551fd63[m
+Author: Carlos Marin Diaz <carlosmarind@gmail.com>
+Date:   Mon Aug 12 21:10:37 2024 -0400
+
+    build en jenkinsfile
+
+[33mcommit c4055158b5a7d3f262e7fa27b9085daa90ee0570[m
+Author: Carlos Marin Diaz <carlosmarind@gmail.com>
+Date:   Mon Aug 12 21:01:40 2024 -0400
+
+    ejecucion de test
+
+[33mcommit 2e36f583c5e4667665e836f474361b80e32b16ce[m
+Author: Carlos Marin Diaz <carlosmarind@gmail.com>
+Date:   Mon Aug 12 20:59:25 2024 -0400
+
+    ejecucion de test
+
+[33mcommit 73baa559648a8988e7fffe18ee00410237095b0e[m
+Author: Carlos Marin Diaz <carlosmarind@gmail.com>
+Date:   Mon Aug 12 20:56:47 2024 -0400
+
+    ejecucion de test
+
+[33mcommit 78323782ca2dfe3619e5d55a053b28851acd2210[m
+Author: Carlos Marin Diaz <carlosmarind@gmail.com>
+Date:   Mon Aug 12 20:53:25 2024 -0400
+
+    docker agent
+
+[33mcommit 4c8a59341b0d38556f2432638821e64c97fac156[m
+Author: Carlos Marin Diaz <carlosmarind@gmail.com>
+Date:   Mon Aug 12 20:31:49 2024 -0400
+
+    npm install en jenkinsfile
+
+[33mcommit cce02b228ac0c0c881e1d5d7c64e5dfdff94cb48[m
+Author: Carlos Marin Diaz <carlosmarind@gmail.com>
+Date:   Mon Aug 12 20:00:42 2024 -0400
+
+    actualizacion de jenkinsfile
+
+[33mcommit ba4f6feae62763c42b401769c4156eaa18b39403[m
+Author: Carlos Marin Diaz <carlosmarind@gmail.com>
+Date:   Mon Aug 12 19:55:54 2024 -0400
+
+    mi primer pipeline
+
+[33mcommit 610c220e9b4f09229e341022547df5d47f568148[m
+Author: Carlos Marin Diaz <carlosmarind@gmail.com>
+Date:   Mon Aug 12 19:11:11 2024 -0400
+
+    test iniciales
+
+[33mcommit 6616cec60d1feaa1a717408a4f95119d903735d9[m
+Author: Carlos Marin Diaz <carlosmarind@gmail.com>
+Date:   Mon Aug 12 17:13:02 2024 -0400
+
+    cambio en nombre de endpoint de operaciones
+
+[33mcommit d1f93a1789d2d484ec48756d70990a9121fffb41[m
+Author: Carlos Marin Diaz <carlosmarind@gmail.com>
+Date:   Mon Aug 12 16:47:03 2024 -0400
+
+    correcion de ficheros a compilar
+
+[33mcommit 3e36c07e710878a78d52af51b523ead78e5d8f12[m
+Author: Carlos Marin Diaz <carlosmarind@gmail.com>
+Date:   Mon Aug 12 16:40:02 2024 -0400
+
+    nuevos test
+
+[33mcommit ba8eeeab463f6e1ec3a094d0ef562371f898d496[m
+Author: Carlos Marin Diaz <carlosmarind@gmail.com>
+Date:   Wed Aug 7 15:53:57 2024 -0400
+
+    actualizacion del proyecto para pruebas
+
+[33mcommit 06606f14558d2c5ea9c295ef8bcfd9e05f8457df[m
+Author: Carlos Marin Diaz <carlosmarind@gmail.com>
+Date:   Wed Jul 31 19:10:29 2024 -0400
+
+    mi tarea
+
+[33mcommit 49d257c375272b733a1308df4c7d586527bf4c1e[m
+Author: Carlos Marin Diaz <carlosmarind@gmail.com>
+Date:   Wed Jul 24 17:05:20 2024 -0400
+
+    mi primer commit
+
+[33mcommit 8648c2e16c4a34b0984e9fd1be6f5dd5ac3160c2[m
+Author: Carlos Marin Diaz <carlosmarind@gmail.com>
+Date:   Mon Jul 22 17:15:44 2024 -0400
+
+    first commit
