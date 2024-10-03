@@ -8,6 +8,7 @@ pipeline {
             agent {
                 docker {
                     image 'node:alpine3.20'
+                    reuseNode true
                 }
             }
             stages{
