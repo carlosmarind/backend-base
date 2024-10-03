@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        NPM_CONFIG_CACHE = "${WORKSPACE}/.npm"
+    }
     stages{
         stage('etapa de construccion de aplicacion'){
             agent {
