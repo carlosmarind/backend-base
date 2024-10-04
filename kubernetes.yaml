@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend-base-deployment
-  namespace: devops
+  namespace: cmd
   labels:
     app: backend-base
 spec:
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: backend-base
-        image: us-central1-docker.pkg.dev/expertis-classroom/docker-repository/backend-base:latest
+        image: us-central1-docker.pkg.dev/expertis-classroom/docker-repository/backend-base:cmd
         imagePullPolicy: Always
         env:
         - name: USERNAME
