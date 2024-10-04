@@ -32,3 +32,44 @@ spec:
               key: APIKEY
       imagePullSecrets:
       - name: regcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-base-svc
+  namespace: cmd
+  labels:
+    app: backend-base
+spec:
+  selector:
+    app: backend-base
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3001
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-backend-base
+  namespace: cmd
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - "cmd.devops.cl"
+    secretName: backend-base-tls
+  rules:
+  - host: cmd.devops.cl
+    http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: backend-base-svc
+            port:
+              number: 80
