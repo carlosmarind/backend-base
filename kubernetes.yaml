@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-base-deployment
+  namespace: devops
+  labels:
+    app: backend-base
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: backend-base
+  template:
+    metadata:
+      labels:
+        app: backend-base
+    spec:
+      containers:
+      - name: backend-base
+        image: us-central1-docker.pkg.dev/expertis-classroom/docker-repository/backend-base:latest
+        imagePullPolicy: Always
+        env:
+        - name: USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: backend-base-cm
+              key: USERNAME
+        - name: APIKEY
+          valueFrom:
+            secretKeyRef:
+              name: backend-base-sc
+              key: APIKEY
+      imagePullSecrets:
+      - name: regcred
