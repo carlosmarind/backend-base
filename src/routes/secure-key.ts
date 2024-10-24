@@ -1,12 +1,12 @@
-import express, { Request, Response, Application, NextFunction } from 'express';
-import { authorize } from '../auth.js';
+import express, { Request, Response } from 'express';
+import { verifyApiKey } from '../auth.js';
 
 let secureRouter = express.Router();
 
 secureRouter.use((req, res, next) => {
-    const token = req.headers.authorization;
-    authorize(token!) ? next() : res.status(401).json({ message: 'Acceso no autorizado' });
- })
+    const token = req.headers["x-api-key"] as string;
+    verifyApiKey(token!) ? next() : res.status(401).json({ message: 'Acceso no autorizado' });
+})
 
 // Endpoint GET
 secureRouter.get('/get_endpoint', (req: Request, res: Response) => {
