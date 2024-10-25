@@ -23,8 +23,7 @@ export const verifyBasicAuth = (token: string) => {
 
 export const verifyJwtToken = (token: string) => {
     try {
-        const decoded = jwt.verify(token, configuration.jwtSecretKey);
-        console.log(decoded)
+        jwt.verify(token, configuration.jwtSecretKey);
         return true;
     } catch (err) {
         return false;
@@ -40,20 +39,16 @@ export const validateUser = (user: string, password: string) => {
 
 export const validateUserForJwtToken = (user: string, password: string) => {
 
-    let secret: string = configuration.jwtSecretKey;
-    console.log('secret:', secret);
+
     if (user === db.user.username && password === db.user.password) {
-        let token = jwt.sign(
-            {
-                username: db.user.username,
-                email: db.user.email,
-                role: db.user.role
-            },
-            secret,
-            {
-                expiresIn: "1d",
-            });
-        console.log('token:', token);
+        let secret: string = configuration.jwtSecretKey;
+        let token = jwt.sign({
+            username: db.user.username,
+            email: db.user.email,
+            role: db.user.role
+        }, secret, {
+            expiresIn: "1d",
+        });
         return { isAuthenticated: true, token };
     }
     return { isAuthenticated: false };
