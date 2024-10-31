@@ -1,5 +1,5 @@
 import { describe, test, expect } from "@jest/globals";
-import { restar, suma, operar } from "../src/calculadora.js";
+import { restar, suma, operar } from "../src/app/calculadora";
 import app from "../src/server.js";
 import request from "supertest";
 

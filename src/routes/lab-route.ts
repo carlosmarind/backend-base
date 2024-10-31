@@ -1,52 +1,53 @@
 import express, { NextFunction, Request, Response } from 'express';
 import { validateUserForJwtToken, verifyJwtToken } from '../auth.js';
 import { User, users } from '../data/users.js';
+import { getRandomInt } from '../app/utils';
 
-let labRouter = express.Router();
-
-function getRandomInt(max: number) {
-    return Math.floor(Math.random() * max);
-}
 const MAX_RANDOM = 1000;
 
-let getLoginUrlPath = `login-${getRandomInt(MAX_RANDOM)}`
-let loginUrlPath = `authenticate-${getRandomInt(MAX_RANDOM)}`
-let createUserPath = `create-user-${getRandomInt(MAX_RANDOM)}`
-let deleteUserUrlPath = `delete-user-${getRandomInt(MAX_RANDOM)}`
-let queryUserUrlPath = `query-user-${getRandomInt(MAX_RANDOM)}`
+const getLoginUrlPath = `login-${getRandomInt(MAX_RANDOM)}`;
+const loginUrlPath = `authenticate-${getRandomInt(MAX_RANDOM)}`;
+const createUserPath = `create-user-${getRandomInt(MAX_RANDOM)}`;
+const deleteUserUrlPath = `delete-user-${getRandomInt(MAX_RANDOM)}`;
+const queryUserUrlPath = `query-user-${getRandomInt(MAX_RANDOM)}`;
+
+const getFullUrl = (req: Request) => `${req.protocol}://${req.get('host')}${req.baseUrl}`;
+
+const labRouter = express.Router();
 
 const validateJwt = (req: Request, res: Response, next: NextFunction) => {
-    const token = req.headers.authorization?.replace('Bearer ', '')
-    verifyJwtToken(token!) ? next() : res.status(401).json({ message: 'Acceso no autorizado' });
+    const token = req.headers.authorization?.replace('Bearer ', '');
+
+    if (!verifyJwtToken(token)) {
+        return res.status(401).json({ message: 'Acceso no autorizado' })
+    }
+
+    next();
 };
 
 labRouter.get("/", (req, res) => {
-    let fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-    let response = {
+    const fullUrl = getFullUrl(req);
+    res.send({
         queryLoginUrl: `${fullUrl}/${getLoginUrlPath}`,
         queryMethod: 'GET'
-    }
-    res.send(response);
+    });
 });
 
 labRouter.get(`/${getLoginUrlPath}`, (req, res) => {
-    let fullUrl = req.protocol + '://' + req.get('host') + '/api';
-    let response = {
+    const fullUrl = getFullUrl(req);
+    res.send({
         queryLoginUrl: `${fullUrl}/${loginUrlPath}`,
         queryMethod: 'POST'
-    }
-    res.send(response);
+    });
 });
 
 labRouter.post(`/${loginUrlPath}`, (req, res) => {
-
-    let fullUrl = req.protocol + '://' + req.get('host') + '/api';
-    const json = req.body;
-    console.log(json)
-    let validation = validateUserForJwtToken(json.username, json.password);
+    const { username, password } = req.body;
+    const validation = validateUserForJwtToken(username, password);
 
     if (validation.isAuthenticated) {
-        let response = {
+        const fullUrl = getFullUrl(req);
+        return res.status(200).send({
             message: "Usuario autenticado con exito",
             createUser: {
                 url: `${fullUrl}/${createUserPath}`,
@@ -61,26 +62,35 @@ labRouter.post(`/${loginUrlPath}`, (req, res) => {
                 method: 'GET'
             },
             token: validation.token
-        }
-        return res.status(200).send(response);
+        });
     }
     return res.status(401).send({ message: 'Usuario o contraseña no validos' });
 });
 
 labRouter.post(`/${createUserPath}`, validateJwt, (req, res) => {
-    const json = req.body as User;
-    users.push(json);
-    res.status(200).send(users);
+    const newUser = req.body as User;
+    const userIndex = users.findIndex(user => user.id === newUser.id);
+
+    if (userIndex !== -1) {
+        return res.status(401).send({ message: 'Usuario ya existe' });
+    }
+
+    users.push(newUser);
+    return res.status(201).send(users);
 });
 
 labRouter.delete(`/${deleteUserUrlPath}`, validateJwt, (req, res) => {
-    const json = req.body as User;
-    let newUsers = users.filter(user => user.id !== json.id);
-    res.status(200).send(newUsers);
+    const { id } = req.body as User;
+    const userIndex = users.findIndex(user => user.id === id);
+    if (userIndex !== -1) {
+        users.splice(userIndex, 1);
+        return res.status(200).send(users);
+    }
+    return res.status(401).send({ message: 'Usuario no encontrado' });
 });
 
-labRouter.get(`/${queryUserUrlPath}`, validateJwt, (req, res) => {
-    res.status(200).send(users);
+labRouter.get(`/${queryUserUrlPath}`, validateJwt, (_req, res) => {
+    return res.status(200).send(users);
 });
 
 export default labRouter;

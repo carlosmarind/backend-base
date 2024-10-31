@@ -1,6 +1,6 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import { db } from './data/db.js';
-import { configuration } from './config.js';
+import { db } from './data/db';
+import { configuration } from './config';
 
 export interface JwtRequest extends Request {
     token: string | JwtPayload;
@@ -10,18 +10,13 @@ export const verifyApiKey = (token: string) => {
     return token === `${configuration.apikey}`;
 };
 
-export const verifyBasicAuth = (token: string) => {
-
-    if (token === undefined) {
-        return false;
-    }
-
+export const verifyBasicAuth = (token: string = "") => {
     let decryptedToken = Buffer.from(token, 'base64').toString('ascii').trim();
     const [username, password] = decryptedToken.split(':');
     return validateUser(username, password).isAuthenticated;
 };
 
-export const verifyJwtToken = (token: string) => {
+export const verifyJwtToken = (token: string = "") => {
     try {
         jwt.verify(token, configuration.jwtSecretKey);
         return true;
@@ -32,23 +27,30 @@ export const verifyJwtToken = (token: string) => {
 
 export const validateUser = (user: string, password: string) => {
     if (user === db.user.username && password === db.user.password) {
-        return { isAuthenticated: true, username: db.user.username, email: db.user.email, role: db.user.role };
+        let userInfo = {
+            username: db.user.username,
+            email: db.user.email,
+            role: db.user.role
+        }
+
+        return { isAuthenticated: true, ...userInfo };
     }
     return { isAuthenticated: false };
 }
 
 export const validateUserForJwtToken = (user: string, password: string) => {
 
-
     if (user === db.user.username && password === db.user.password) {
-        let secret: string = configuration.jwtSecretKey;
-        let token = jwt.sign({
-            username: db.user.username,
-            email: db.user.email,
-            role: db.user.role
-        }, secret, {
-            expiresIn: "1d",
-        });
+        let token = jwt.sign(
+            {
+                username: db.user.username,
+                email: db.user.email,
+                role: db.user.role
+            },
+            configuration.jwtSecretKey,
+            {
+                expiresIn: "1d",
+            });
         return { isAuthenticated: true, token };
     }
     return { isAuthenticated: false };

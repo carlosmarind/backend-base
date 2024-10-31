@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import { verifyBasicAuth } from '../auth.js';
 
 let secureBasicRouter = express.Router();
@@ -9,24 +9,22 @@ secureBasicRouter.use((req, res, next) => {
 })
 
 // Endpoint GET
-secureBasicRouter.get('/get_endpoint', (req: Request, res: Response) => {
+secureBasicRouter.get('/get_endpoint', (_req, res) => {
     res.json({ message: 'Este es un endpoint GET protegido.' });
 });
 
 // Endpoint POST
-secureBasicRouter.post('/post_endpoint', (req: Request, res: Response) => {
-    const data = req.body;
-    res.json({ message: 'Este es un endpoint POST protegido.', receivedData: data });
+secureBasicRouter.post('/post_endpoint', (req, res) => {
+    res.json({ message: 'Este es un endpoint POST protegido.', receivedData: req.body });
 });
 
 // Endpoint PUT
-secureBasicRouter.put('/put_endpoint', (req: Request, res: Response) => {
-    const data = req.body;
-    res.json({ message: 'Este es un endpoint PUT protegido.', receivedData: data });
+secureBasicRouter.put('/put_endpoint', (req, res) => {
+    res.json({ message: 'Este es un endpoint PUT protegido.', receivedData: req.body });
 });
 
 // Endpoint DELETE
-secureBasicRouter.delete('/delete_endpoint', (_req: Request, res: Response) => {
+secureBasicRouter.delete('/delete_endpoint', (_req, res) => {
     res.json({ message: 'Este es un endpoint DELETE protegido.' });
 });
 

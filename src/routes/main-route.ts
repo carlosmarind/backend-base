@@ -1,19 +1,19 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import { validateUser, validateUserForJwtToken } from '../auth.js';
-import { configuration } from '../config.js';
+import { configuration } from '../config/index.js';
+
 let mainRouter = express.Router();
 
-mainRouter.get("/", (req, res) => {
+mainRouter.get("/", (_req, res) => {
     res.send(`Hola mundo al usuario ${configuration.username}`);
 });
 
-mainRouter.get("/api-key", (req, res) => {
+mainRouter.get("/api-key", (_req, res) => {
     res.send(`la apikey de mi aplicacion es: ${configuration.apikey}`);
 });
 
-mainRouter.post('/login', (req: Request, res: Response) => {
+mainRouter.post('/login', (req, res) => {
     const json = req.body;
-    console.log(json);
     let validation = validateUser(json.username, json.password);
     if (validation.isAuthenticated) {
         return res.json({
@@ -31,9 +31,8 @@ mainRouter.post('/login', (req: Request, res: Response) => {
     }
 });
 
-mainRouter.post('/auth', (req: Request, res: Response) => {
+mainRouter.post('/auth', (req, res) => {
     const json = req.body;
-    console.log(json);
     let validation = validateUserForJwtToken(json.username, json.password);
     if (validation.isAuthenticated) {
         return res.json({
@@ -50,6 +49,5 @@ mainRouter.post('/auth', (req: Request, res: Response) => {
         });
     }
 });
-
 
 export default mainRouter;
