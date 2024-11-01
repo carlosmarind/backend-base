@@ -66,5 +66,5 @@
 	],
 	"include": [
 		"src/**/*.ts"
-, "__test__/secure-key.test.ts", "__test__/secure-jwt.test.ts", "__test__/secure-basic.test.ts", "__test__/main-route.test.ts", "__test__/lab-route.test.ts"	]
+	]
 }
