@@ -66,5 +66,5 @@
 	],
 	"include": [
 		"src/**/*.ts"
-	]
+, "__test__/lab2-route.test.ts"	]
 }
