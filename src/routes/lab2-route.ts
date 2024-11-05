@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express';
-import { esPalindromo } from '../app/palabras';
-import { esPrimo } from '../app/numeros';
+import { esPalindromo } from '../app/palabras.js';
+import { esPrimo } from '../app/numeros.js';
 
 const labRouter = express.Router();
 

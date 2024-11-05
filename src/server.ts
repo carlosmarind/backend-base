@@ -1,11 +1,11 @@
 import cors from 'cors';
 import express from 'express';
-import secureRouter from "./routes/secure-key";
-import secureJwtRouter from "./routes/secure-jwt";
-import secureBasicRouter from "./routes/secure-basic";
-import mainRouter from "./routes/main-route";
-import labRouter from './routes/lab-route';
-import lab2Router from './routes/lab2-route';
+import secureRouter from "./routes/secure-key.js";
+import secureJwtRouter from "./routes/secure-jwt.js";
+import secureBasicRouter from "./routes/secure-basic.js";
+import mainRouter from "./routes/main-route.js";
+import labRouter from './routes/lab-route.js';
+import lab2Router from './routes/lab2-route.js';
 
 const app = express();
 

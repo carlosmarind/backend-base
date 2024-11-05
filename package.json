@@ -12,7 +12,6 @@
     "build": "tsc",
     "dev": "tsx watch src/index.ts",
     "test": "jest --coverage",
-    "prepublish": "npm run build",
     "publish": "docker build -t carlosmarind/backend-base .",
     "postpublish": "docker push carlosmarind/backend-base"
   },

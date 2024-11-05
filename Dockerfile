@@ -1,5 +1,5 @@
 #etapa 1 de construccion
-FROM node:20 AS build
+FROM node:22 AS build
 
 WORKDIR /usr/app
 

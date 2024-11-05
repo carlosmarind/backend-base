@@ -52,7 +52,6 @@ describe("Calculadora", () => {
         expect(() => { restar(a, b) }).toThrow("No se puede sumar indefinidos");
     });
 
-
     test("test de endpoint /", async () => {
         return await request(app)
             .get("/")
@@ -62,7 +61,4 @@ describe("Calculadora", () => {
                 expect(response.text).toMatch(/Hola mundo al usuario/);
             })
     });
-
-
-
 });

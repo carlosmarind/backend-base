@@ -1,6 +1,6 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import { db } from './data/db';
-import { configuration } from './config';
+import { db } from './data/db.js';
+import { configuration } from './config/index.js';
 
 export interface JwtRequest extends Request {
     token: string | JwtPayload;

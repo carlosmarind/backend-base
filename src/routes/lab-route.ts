@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response } from 'express';
 import { validateUserForJwtToken, verifyJwtToken } from '../auth.js';
 import { User, users } from '../data/users.js';
-import { getRandomInt } from '../app/utils';
+import { getRandomInt } from '../app/utils/index.js';
 
 const MAX_RANDOM = 1000;
 
