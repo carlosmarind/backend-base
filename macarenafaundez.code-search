@@ -1,0 +1,66 @@
+# Query: username
+# ContextLines: 1
+
+18 results - 6 files
+
+~/backend-base/kubernetes.yaml:
+  22          env:
+  23:         - name: USERNAME
+  24            value: "macarenafaundez"
+  
+  26                name: backend-base-cm
+  27:               key: USERNAME
+  28          - name: PASSWORD_BD
+
+~/backend-base/src/auth.ts:
+   5  export const validatePlainUser = (user: string, password: string) => {
+   6:     if (user === db.plainUser.username && password === db.plainUser.password) {
+   7          return true;
+
+  13  export const validateUser = (user: string, password: string) => {
+  14:     if (user === db.User.username && password === db.User.password) {
+  15:         return { isAuthenticated: true, username: db.User.username, email: db.User.email, role: db.User.role };
+  16      }
+
+  23      console.log('secret:', secret);
+  24:     if (user === db.User.username && password === db.User.password) {
+  25          let token = jwt.sign(
+  26              {
+  27:                 username: db.User.username,
+  28                  email: db.User.email,
+
+~/backend-base/src/config.ts:
+  1  export const configuration = {
+  2:     username: process.env.USERNAME,
+  3      apikey: process.env.APIKEY,
+
+~/backend-base/src/index.ts:
+  4  app.listen(configuration.port, () => {
+  5:   console.log(`El usuario ${configuration.username} ha levantado la aplicacion en el puerto ${configuration.port}`);
+  6  });
+
+~/backend-base/src/server.ts:
+   19  app.get("/", (req, res) => {
+   20:   res.send(`Hola mundo al usuario ${configuration.username}`);
+   21  });
+
+   62    console.log(json);
+   63:   let validation = validateUser(json.username, json.password);
+   64  
+
+  105    {
+  106:       username: "admin",
+  107        password: "admin123"
+
+  110    */
+  111:   let validation = validateUserWithToken(json.username, json.password);
+  112  
+
+~/backend-base/src/data/db.json:
+  2      "plainUser": {
+  3:         "username": "admin",
+  4          "password": "admin123"
+
+  6      "User": {
+  7:         "username": "admin",
+  8          "password": "0192023a7bbd73250516f069df18b500",
